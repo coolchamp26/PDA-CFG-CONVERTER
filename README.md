@@ -1,52 +1,236 @@
 # CFG ↔ PDA: TAFL Visualizer
 
-A stunning, interactive web application built to cleanly convert between **Context-Free Grammars (CFG)** and **Pushdown Automata (PDA)**. 
+An advanced, interactive web application for converting between **Context-Free Grammars (CFGs)** and **Pushdown Automata (PDAs)** with mathematically rigorous algorithms and clean, exam-ready outputs.
 
-This project implements rigorous mathematical algorithms from the Theory of Automata and Formal Languages (TAFL), featuring an intuitive user interface and fully animated interactive graphs.
+Built with a focus on **clarity, correctness, and performance**, this tool bridges formal language theory with intuitive visualization.
+
+---
 
 ## 🚀 Features
 
-- **CFG to PDA Conversion:** Converts Context-Free Grammars into equivalent non-deterministic Pushdown Automata accepting by empty stack. Supports top-down parser logic implicitly.
-- **PDA to CFG Conversion:** Implements the formal Hopcroft-Ullman Triple Construction algorithm (`[qi, X, qj]`). Accompanied by a 7-step recursive optimization and minimization pipeline:
-   - Removes unreachable and non-generating variables gracefully.
-   - Eliminates cascading ε-rules natively.
-   - Eliminates Unit Productions (collapsing `A → B` chains flawlessly).
-   - Generates minimal and highly readable "exam-ready" output.
-- **Interactive Graph Rendering:** Automatic spatial layouts of Pushdown Automata states and transition paths using a proprietary vanilla SVG implementation with drag-and-pan controls.
-- **Theme-Aware UI:** Beautiful built-in Light and Dark modes. Heavy use of modern CSS techniques like glassmorphism overlays, aesthetic gradients, and polished micro-animations.
+### 🔁 Bidirectional Conversion
+
+* **CFG → PDA**
+
+  * Implements standard construction using stack-based leftmost derivation simulation.
+  * Generates minimal 3-state PDA (`q_start`, `q_loop`, `q_accept`).
+  * Ensures correct reverse push of RHS symbols.
+
+* **PDA → CFG**
+
+  * Implements **Hopcroft-Ullman Triple Construction** (`[qi, X, qj]`).
+  * Covers all intermediate state combinations for correctness.
+  * Produces a fully equivalent grammar before simplification.
+
+---
+
+### 🧠 Intelligent Simplification Engine
+
+A multi-stage optimization pipeline ensures clean, minimal output:
+
+* Removal of **unreachable variables**
+* Removal of **non-generating symbols**
+* Elimination of **ε-productions**
+* Elimination of **unit productions** (`A → B`)
+* Deduplication of redundant rules
+* Pattern compression into **exam-standard forms** (e.g., `S → aSb | ab`)
+
+---
+
+### 📊 Interactive PDA Visualization
+
+* Automatic **graph layout generation**
+* Smooth **SVG-based rendering**
+* Drag-and-pan support
+* Clear depiction of transitions and stack operations
+
+---
+
+### 🎨 Modern UI/UX
+
+* Light & Dark mode support
+* Glassmorphism-inspired design
+* Smooth animations and micro-interactions
+* Fully responsive layout
+
+---
 
 ## 🛠 Technologies Used
 
-- **HTML5 & Vanilla CSS3**: Highly structured DOM featuring CSS flex/grid layouts, dynamic custom variables, responsive typography, and glassmorphic aesthetic depth. Zero external CSS frameworks.
-- **Vanilla JavaScript (ES6+)**: Clean, encapsulated module patterns for algorithmic logic, mathematical minimization passes, and interactive SVG canvas manipulations. Zero heavy frontend libraries (no React/Vue), ensuring maximum execution velocity directly in the browser runtime.
+* **HTML5 & CSS3**
+
+  * Flexbox & Grid layouts
+  * Custom properties (CSS variables)
+  * Responsive typography
+  * Glassmorphic UI design
+
+* **Vanilla JavaScript (ES6+)**
+
+  * Modular architecture
+  * Algorithmic transformation logic
+  * No external frameworks (maximum performance)
+
+---
 
 ## 📂 Project Structure
 
 ```text
-├── index.html            <- Main application entry point & layout definition
+├── index.html            <- Application entry point
 ├── css/
-│   └── style.css         <- Core styling, animations, and theme implementations
+│   └── style.css         <- Styling, animations, themes
 └── js/
-    ├── app.js            <- Global DOM bindings, toast notifications, UI state logic
-    ├── cfg-parser.js     <- Textual CFG parser & internal data structure formatter
-    ├── cfg-to-pda.js     <- Conversion logic mapping CFG rules to PDA transitions
-    ├── pda-to-cfg.js     <- Core engine for formal PDA to CFG recursive generation & minimization
-    ├── pda-visualizer.js <- Graph rendering engine mapping state transitions into animated SVGs
-    └── simulation.js     <- (Optional) Step-by-step logic and machine simulator algorithms
+    ├── app.js            <- UI logic & state management
+    ├── cfg-parser.js     <- CFG parsing & normalization
+    ├── cfg-to-pda.js     <- CFG → PDA conversion engine
+    ├── pda-to-cfg.js     <- PDA → CFG construction + simplification
+    ├── pda-visualizer.js <- SVG graph rendering engine
+    └── simulation.js     <- Optional step-by-step execution
 ```
 
-## 🎮 How to Access
+---
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/your-username/cfg-pda-visualizer.git
+## 🎮 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/cfg-pda-visualizer.git
+cd cfg-pda-visualizer
+```
+
+### 2. Run Locally
+
+Open `index.html` directly in your browser
+OR use a local server:
+
+```bash
+npx serve .
+```
+
+### 3. Use the Interface
+
+* **CFG → PDA Tab**
+
+  * Input rules like:
+
+    ```
+    S -> aSb | ab
+    ```
+  * View generated PDA + graph
+
+* **PDA → CFG Tab**
+
+  * Input transitions like:
+
+    ```
+    (q0, a, Z) -> (q1, AZ)
+    ```
+  * Get minimized CFG instantly
+
+---
+
+## ⚙️ Conversion Process
+
+### 🔁 CFG → PDA (Standard Construction)
+
+1. Initialize stack with start symbol:
+
    ```
-2. **Launch locally:** 
-   Open `index.html` directly in your favorite modern browser. Alternatively, run a local development server for the cleanest experience (e.g. `npx serve .`).
-3. **Select your mode via the Top Navigation Bar:**
-   - **CFG → PDA Tab**: Input rules in standard text-based notation (e.g., `S -> a | a S b`). Watch it immediately generate the formal tuple mathematical model and state diagram.
-   - **PDA → CFG Tab**: Specify formal PDA configurations (states, alphabets, transitions). Use natural syntax strings like `(q0, a, Z) -> (q1, AZ)`. Enjoy an interactive view of the generated transition graph, and immediately reveal the mathematically minimal grammar!
+   (q_start, ε, ε) → (q_loop, SZ)
+   ```
 
-## 🤝 Open Source Note
+2. For each production:
 
-This project is perfectly suited for use by Computer Science students and institutions teaching formal language and automata theory natively visualizing notoriously difficult computational models directly in the browser!
+   ```
+   A → X₁ X₂ ... Xₙ
+   ```
+
+   Add:
+
+   ```
+   (q_loop, ε, A) → (q_loop, Xₙ ... X₂ X₁)
+   ```
+
+   (Push RHS in reverse order)
+
+3. Match terminals:
+
+   ```
+   (q_loop, a, a) → (q_loop, ε)
+   ```
+
+4. Accept when stack is empty:
+
+   ```
+   (q_loop, ε, Z) → (q_accept, ε)
+   ```
+
+---
+
+### 🔁 PDA → CFG (Hopcroft-Ullman Construction)
+
+1. Create variables:
+
+   ```
+   [qi X qj]
+   ```
+
+   Meaning: transitions from `qi` to `qj` removing `X`
+
+2. Start symbol:
+
+   ```
+   S → [q_start Z q_accept]
+   ```
+
+3. For transitions:
+
+   * Pop:
+
+     ```
+     (qi, a, X) → (qj, ε)
+     ⇒ [qi X qj] → a
+     ```
+   * Push:
+
+     ```
+     (qi, a, X) → (qj, Y1 Y2)
+     ⇒ combine intermediate states:
+     [qi X qk] → a [qj Y1 q1][q1 Y2 qk]
+     ```
+
+4. Generate all valid combinations
+
+---
+
+### 🧹 Simplification Pipeline
+
+After construction:
+
+* Remove useless variables
+* Remove unreachable symbols
+* Eliminate ε-productions
+* Eliminate unit productions
+* Collapse recursive patterns
+* Minimize grammar size
+
+---
+
+## 🎯 Design Philosophy
+
+* **Correctness over shortcuts**
+* **Minimal outputs for exams**
+* **Readable transformations**
+* **Interactive understanding over static theory**
+
+---
+
+## 🚀 Future Improvements
+
+* Step-by-step simulation of stack operations
+* CFG ambiguity detection
+* CNF/GNF conversion modules
+* Export graphs as images/PDF
+* Competitive programming mode (quick solve)
+
+---
