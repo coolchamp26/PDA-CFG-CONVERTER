@@ -1,10 +1,32 @@
-# CFG ↔ PDA: Visualizer
+# CFG ↔ PDA Visualizer
 
-MADE BY: ASHAMBAR CHATURVEDI(2024UCA1898)
+### *(Theory of Automata and Formal Languages Project)*
 
-An advanced, interactive web application for converting between **Context-Free Grammars (CFGs)** and **Pushdown Automata (PDAs)** with mathematically rigorous algorithms and clean, exam-ready outputs.
+**Made by:** Ashambar Chaturvedi (2024UCA1898)
 
-Built with a focus on **clarity, correctness, and performance**, this tool bridges formal language theory with intuitive visualization.
+---
+
+## 📌 Project Overview
+
+This project presents an interactive web-based tool for converting between **Context-Free Grammars (CFGs)** and **Pushdown Automata (PDAs)**.
+
+It is developed as part of the **Theory of Automata and Formal Languages (TAFL)** coursework, with the goal of bridging the gap between theoretical concepts and practical visualization.
+
+The application focuses on:
+
+* Mathematical correctness
+* Step-by-step formal transformations
+* Clean, minimal, exam-oriented outputs
+* Interactive understanding through visualization
+
+---
+
+## 🎯 Objectives
+
+* To implement standard algorithms for **CFG → PDA** and **PDA → CFG** conversion
+* To provide **visual representation** of Pushdown Automata
+* To simplify complex grammars into **minimal, readable forms**
+* To assist students in understanding TAFL concepts more intuitively
 
 ---
 
@@ -12,48 +34,56 @@ Built with a focus on **clarity, correctness, and performance**, this tool bridg
 
 ### 🔁 Bidirectional Conversion
 
-* **CFG → PDA**
+#### CFG → PDA
 
-  * Implements standard construction using stack-based leftmost derivation simulation.
-  * Generates minimal 3-state PDA (`q_start`, `q_loop`, `q_accept`).
-  * Ensures correct reverse push of RHS symbols.
+* Uses standard construction based on **stack-driven leftmost derivation**
+* Generates a minimal 3-state PDA:
 
-* **PDA → CFG**
+  * `q_start`, `q_loop`, `q_accept`
+* Ensures correct **reverse push of RHS symbols**
 
-  * Implements **Hopcroft-Ullman Triple Construction** (`[qi, X, qj]`).
-  * Covers all intermediate state combinations for correctness.
-  * Produces a fully equivalent grammar before simplification.
+#### PDA → CFG
+
+* Implements **Hopcroft-Ullman Triple Construction**:
+
+  ```
+  [qi, X, qj]
+  ```
+* Handles all intermediate state combinations
+* Produces a complete CFG before simplification
 
 ---
 
-### 🧠 Intelligent Simplification Engine
+### 🧠 Grammar Simplification Engine
 
-A multi-stage optimization pipeline ensures clean, minimal output:
+A structured pipeline is applied to produce clean and minimal results:
 
 * Removal of **unreachable variables**
 * Removal of **non-generating symbols**
 * Elimination of **ε-productions**
 * Elimination of **unit productions** (`A → B`)
-* Deduplication of redundant rules
-* Pattern compression into **exam-standard forms** (e.g., `S → aSb | ab`)
+* Removal of redundant rules
+* Conversion into **exam-standard forms**
 
 ---
 
-### 📊 Interactive PDA Visualization
+### 📊 PDA Visualization
 
-* Automatic **graph layout generation**
-* Smooth **SVG-based rendering**
-* Drag-and-pan support
-* Clear depiction of transitions and stack operations
+* Graphical representation using **SVG**
+* Automatic layout of states and transitions
+* Interactive features:
+
+  * Dragging nodes
+  * Panning the canvas
+* Clear depiction of stack operations
 
 ---
 
-### 🎨 Modern UI/UX
+### 🎨 User Interface
 
-* Light & Dark mode support
-* Glassmorphism-inspired design
-* Smooth animations and micro-interactions
-* Fully responsive layout
+* Light and Dark theme support
+* Clean and responsive design
+* Smooth animations for better user experience
 
 ---
 
@@ -61,81 +91,40 @@ A multi-stage optimization pipeline ensures clean, minimal output:
 
 * **HTML5 & CSS3**
 
-  * Flexbox & Grid layouts
-  * Custom properties (CSS variables)
-  * Responsive typography
-  * Glassmorphic UI design
+  * Flexbox and Grid layouts
+  * CSS variables
+  * Responsive design
 
 * **Vanilla JavaScript (ES6+)**
 
-  * Modular architecture
-  * Algorithmic transformation logic
-  * No external frameworks (maximum performance)
+  * Modular code structure
+  * Algorithm implementation
+  * No external frameworks used
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-├── index.html            <- Application entry point
+├── index.html            <- Main interface
 ├── css/
-│   └── style.css         <- Styling, animations, themes
+│   └── style.css         <- Styling and themes
 └── js/
-    ├── app.js            <- UI logic & state management
-    ├── cfg-parser.js     <- CFG parsing & normalization
-    ├── cfg-to-pda.js     <- CFG → PDA conversion engine
-    ├── pda-to-cfg.js     <- PDA → CFG construction + simplification
-    ├── pda-visualizer.js <- SVG graph rendering engine
-    └── simulation.js     <- Optional step-by-step execution
+    ├── app.js            <- UI logic
+    ├── cfg-parser.js     <- CFG parsing
+    ├── cfg-to-pda.js     <- CFG → PDA conversion
+    ├── pda-to-cfg.js     <- PDA → CFG conversion
+    ├── pda-visualizer.js <- Graph rendering
+    └── simulation.js     <- Optional simulation logic
 ```
 
 ---
 
-## 🎮 Getting Started
+## ⚙️ Conversion Methodology
 
-### 1. Clone the Repository
+### 🔁 CFG → PDA
 
-```bash
-git clone https://github.com/your-username/cfg-pda-visualizer.git
-cd cfg-pda-visualizer
-```
-
-### 2. Run Locally
-
-Open `index.html` directly in your browser
-OR use a local server:
-
-```bash
-npx serve .
-```
-
-### 3. Use the Interface
-
-* **CFG → PDA Tab**
-
-  * Input rules like:
-
-    ```
-    S -> aSb | ab
-    ```
-  * View generated PDA + graph
-
-* **PDA → CFG Tab**
-
-  * Input transitions like:
-
-    ```
-    (q0, a, Z) -> (q1, AZ)
-    ```
-  * Get minimized CFG instantly
-
----
-
-## ⚙️ Conversion Process
-
-### 🔁 CFG → PDA (Standard Construction)
-
-1. Initialize stack with start symbol:
+1. Initialize stack:
 
    ```
    (q_start, ε, ε) → (q_loop, SZ)
@@ -150,10 +139,10 @@ npx serve .
    Add:
 
    ```
-   (q_loop, ε, A) → (q_loop, Xₙ ... X₂ X₁)
+   (q_loop, ε, A) → (q_loop, Xₙ ... X₁)
    ```
 
-   (Push RHS in reverse order)
+   *(RHS pushed in reverse order)*
 
 3. Match terminals:
 
@@ -161,7 +150,7 @@ npx serve .
    (q_loop, a, a) → (q_loop, ε)
    ```
 
-4. Accept when stack is empty:
+4. Accept when stack becomes empty:
 
    ```
    (q_loop, ε, Z) → (q_accept, ε)
@@ -169,15 +158,13 @@ npx serve .
 
 ---
 
-### 🔁 PDA → CFG (Hopcroft-Ullman Construction)
+### 🔁 PDA → CFG
 
-1. Create variables:
+1. Define variables:
 
    ```
    [qi X qj]
    ```
-
-   Meaning: transitions from `qi` to `qj` removing `X`
 
 2. Start symbol:
 
@@ -185,7 +172,7 @@ npx serve .
    S → [q_start Z q_accept]
    ```
 
-3. For transitions:
+3. Convert transitions:
 
    * Pop:
 
@@ -197,25 +184,56 @@ npx serve .
 
      ```
      (qi, a, X) → (qj, Y1 Y2)
-     ⇒ combine intermediate states:
-     [qi X qk] → a [qj Y1 q1][q1 Y2 qk]
+     ⇒ [qi X qk] → a [qj Y1 q1][q1 Y2 qk]
      ```
 
 4. Generate all valid combinations
 
 ---
 
-### 🧹 Simplification Pipeline
+### 🧹 Simplification
 
 After construction:
 
-* Remove useless variables
-* Remove unreachable symbols
+* Remove useless and unreachable variables
 * Eliminate ε-productions
-* Eliminate unit productions
-* Collapse recursive patterns
-* Minimize grammar size
+* Remove unit productions
+* Simplify recursive patterns
+* Produce minimal grammar
 
 ---
 
+## 🎮 How to Run
 
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/cfg-pda-visualizer.git
+   cd cfg-pda-visualizer
+   ```
+
+2. Open `index.html` in a browser
+   OR run:
+
+   ```bash
+   npx serve .
+   ```
+
+---
+
+## 📚 Learning Outcomes
+
+* Understanding of CFG and PDA equivalence
+* Implementation of formal TAFL algorithms
+* Experience with parsing and transformation logic
+* Visualization of theoretical models
+
+---
+
+## 📌 Conclusion
+
+This project demonstrates the practical implementation of core concepts from **Formal Languages and Automata Theory**, providing both computational accuracy and visual clarity.
+
+It serves as a learning aid as well as a reference tool for students studying TAFL.
+
+---
