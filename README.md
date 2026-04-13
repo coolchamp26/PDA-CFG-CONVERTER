@@ -1,4 +1,6 @@
-# CFG ↔ PDA: TAFL Visualizer
+# CFG ↔ PDA: Visualizer
+
+MADE BY: ASHAMBAR CHATURVEDI(2024UCA1898)
 
 An advanced, interactive web application for converting between **Context-Free Grammars (CFGs)** and **Pushdown Automata (PDAs)** with mathematically rigorous algorithms and clean, exam-ready outputs.
 
@@ -216,21 +218,4 @@ After construction:
 
 ---
 
-## 🎯 Design Philosophy
 
-* **Correctness over shortcuts**
-* **Minimal outputs for exams**
-* **Readable transformations**
-* **Interactive understanding over static theory**
-
----
-
-## 🚀 Future Improvements
-
-* Step-by-step simulation of stack operations
-* CFG ambiguity detection
-* CNF/GNF conversion modules
-* Export graphs as images/PDF
-* Competitive programming mode (quick solve)
-
----
